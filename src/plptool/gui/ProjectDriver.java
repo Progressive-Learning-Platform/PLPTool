@@ -297,8 +297,8 @@ public final class ProjectDriver
 		// check for JRE version
 		
 		String tokens[] = System.getProperty("java.version").split("\\.");
-			int major = Integer.parseInt(tokens[0]);
-			int minor = 0; // Default value to prevent index OOB exception.
+		int major = Integer.parseInt(tokens[0]);
+		int minor = 0; // Default value for JVMs without minor versions.
 		if (tokens.length >= 2) {
 			 minor = Integer.parseInt(tokens[1]);
 		}
