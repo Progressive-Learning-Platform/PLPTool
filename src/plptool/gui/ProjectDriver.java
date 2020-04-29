@@ -192,10 +192,8 @@ public final class ProjectDriver
 	/**
 	 * The constructor for the project driver.
 	 *
-	 * @param g
+	 * @param modes
 	 *            Specifies whether we are driving a GUI or not
-	 * @param archID
-	 *            The ISA to use for this project
 	 */
 	public ProjectDriver(int modes)
 	{
@@ -300,7 +298,10 @@ public final class ProjectDriver
 		
 		String tokens[] = System.getProperty("java.version").split("\\.");
 		int major = Integer.parseInt(tokens[0]);
-		int minor = Integer.parseInt(tokens[1]);
+		int minor = 0; // Default value for JVMs without minor versions.
+		if (tokens.length >= 2) {
+			 minor = Integer.parseInt(tokens[1]);
+		}
 		
 		if ((major == Constants.minimumJREMajorVersion && minor < Constants.minimumJREMinorVersion)
 				|| major < Constants.minimumJREMajorVersion)
@@ -317,7 +318,7 @@ public final class ProjectDriver
 	/**
 	 * Set a new architecture for the project
 	 *
-	 * @param arch
+	 * @param archID
 	 * @return
 	 */
 	public int setArch(int archID)
